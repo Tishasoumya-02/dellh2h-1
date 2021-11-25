@@ -12,7 +12,6 @@ function Chat() {
     const messagesFromRedux=useSelector(state=>state.message.messages);
     
     useEffect(()=>{
-      
         eventQuery('WelcomeToMyBot');
     },[]);
         const textQuery = async (text) => {
@@ -137,7 +136,7 @@ function Chat() {
             }
         }
         return <div >
-
+<div>
              <div class="chat_text">
              <h1 class="chat-text-1">  Hello!</h1>
              <br/>
@@ -174,6 +173,7 @@ function Chat() {
                  
 
              </div> 
+        </div>
         </div>
        
 }

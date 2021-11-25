@@ -1,0 +1,61 @@
+
+
+.btn {
+    -webkit-border-radius: 41;
+    -moz-border-radius: 41;
+    border-radius: 41px;
+    text-shadow: 2px 2px 4px #000000;
+    font-family:  'Comfortaa', cursive;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 34px;
+    background: #FF7800;
+    padding: 16px 29px 19px 29px;
+    border: solid #F4E185 11px;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background: #F4E185;
+    text-decoration: none;
+  }
+
+  .middle{
+      padding-top: 2.5rem;
+
+  }
+
+  .middletext-1{
+      font-family:  'Comfortaa', cursive;
+      color:#FF7800;
+      font-size: 34px;
+      font-weight: 700;
+      text-align: center;
+  }
+
+  .middletext-2{
+    font-family:  'Comfortaa', cursive;
+    color:#FF7800;
+    font-size: 19px;
+    font-weight: 300;
+    text-align: center;
+    margin-top: -1rem;
+}
+
+.middleadmin{
+ float: left;
+ margin-left: 9rem;
+}
+
+.middleuser{
+ float: right;
+ margin-right: 10rem;
+}
+
+.middleimg{
+    height:20px;
+    width:20px;
+    margin-top: -5rem;
+    margin-left: 8rem;
+    float:left;
+}
