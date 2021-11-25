@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from 'axios';
+import {useDispatch,useSelector} from 'react-redux';
+import {saveMessage} from '../src/_actions/message_actions';
+
+import Message from "./Message";
 
 function Chat() {
         
-        /*const textQuery = async {text} => {
-            //the message we send
+
+    const dispatch=useDispatch();
+    const messagesFromRedux=useSelector(state=>state.message.messages);
+    
+    useEffect(()=>{
+      
+        eventQuery('WelcomeToMyBot');
+    },[]);
+        const textQuery = async (text) => {
+           
+            //the message I sent
 
             let conversation = {
                 who: 'user',
@@ -13,6 +27,8 @@ function Chat() {
                     }
                 }
             }
+            dispatch(saveMessage(conversation));
+            //  console.log("text I sent",conversation);
             //the message by the chat bot
             
             const textQueryVaraiables = {
@@ -22,38 +38,104 @@ function Chat() {
             try{
 
                 //send request to text query route
-                const response = await Axios.post('/api/dialogflow/textQuery',textQueryVaraiables)
-                response.data = response.data.fulfillmentMessages[0]
+
+                const response = await axios.post('http://localhost:5000/api/dialogflow/textQuery',textQueryVaraiables)
+                const content= response.data.fulfillmentMessages[0]
 
                 conversation = {
                     who: 'Chatbot',
                     content:content
                 }
-            } catch (error)
+                dispatch(saveMessage(conversation));
+                // console.log(conversation);
+            } 
+            catch (error)
             {
                 conversation = {
                     who: 'Chatbot',
                     content:{
                         text:{
-                            text: "Error"
+                            text: "Error just occured" 
                         }
                     }
                 }
+                dispatch(saveMessage(conversation));
+                // console.log(conversation);
             }
         }
-        const keyPressHandler = {e} => {
+       
+    
+        const eventQuery = async (event) => {
+           
+          
+            //the message by the chat bot
+            
+            const eventQueryVaraiables = {
+              event
+            }
+
+            try{
+
+                //send request to text query route
+
+                const response = await axios.post('http://localhost:5000/api/dialogflow/eventQuery',eventQueryVaraiables)
+                const content= response.data.fulfillmentMessages[0]
+
+              let conversation = {
+                    who: 'Chatbot',
+                    content:content
+                }
+                dispatch(saveMessage(conversation));
+                // console.log(conversation);
+            } 
+            catch (error)
+            {
+               let conversation = {
+                    who: 'Chatbot',
+                    content:{
+                        text:{
+                            text: "Error just occured" 
+                        }
+                    }
+                }
+                dispatch(saveMessage(conversation));
+                // console.log(conversation);
+            }
+        }
+      
+        const keyPressHandler = (e) => {
             if (e.key === "Enter"){
                 if(!e.target.value) {
-                    return alert('You need to enter something first')
+                    return alert('You need to enter something first');
                 }
-
                 //we will send request to text query route
+
                 textQuery(e.target.value)
 
                 e.target.vaue = ""
+          
+          
             }
-        }*/
+        }
 
+        const renderOneMessage=(message,i)=>{
+            console.log('message',message);
+          
+            return <Message key={i} who={message.who} text={message.content.text.text} />
+
+        }
+        const renderMessage=(returnedMessages)=>{
+                   
+            if(returnedMessages)
+            {
+                return returnedMessages.map((message,i) => {
+                    return renderOneMessage(message,i);
+                })
+            }
+            else{
+                return null;
+            }
+        }
         return <div >
 
              <div class="chat_text">
@@ -72,6 +154,8 @@ function Chat() {
                   height:320, width:'100%', overflow:'auto'
                  }}>
                  
+
+                 {renderMessage(messagesFromRedux)}
                  </div>
 
                  <input 
@@ -80,7 +164,7 @@ function Chat() {
                   borderRadius: '4px', padding: '2px', fontSize:'1rem' }}
 
                   placeholder="Send a message..."
-                  onKeyPress //={keyPressHandler}
+                   onKeyPress ={keyPressHandler}
                   type="text" 
 
                   />

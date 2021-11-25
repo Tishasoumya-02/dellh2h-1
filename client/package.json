@@ -3,31 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.17.1",
     "axios": "^0.24.0",
     "prop-types": "^15.7.2",
-=======
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
->>>>>>> a500ccd1a906e22a54849600e4bc854fa5eb2c09
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-<<<<<<< HEAD
     "redux": "^4.1.2",
+    "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
-=======
-    "web-vitals": "^1.1.2"
->>>>>>> a500ccd1a906e22a54849600e4bc854fa5eb2c09
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,11 +42,7 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-<<<<<<< HEAD
     ],
     "proxy": "http://localhost:5000"
-=======
-    ]
->>>>>>> a500ccd1a906e22a54849600e4bc854fa5eb2c09
   }
 }
