@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from 'axios';
 import {useDispatch,useSelector} from 'react-redux';
 import {saveMessage} from '../src/_actions/message_actions';
-
+import  './style.css';
 import Message from "./Message";
 
 function Chat() {
@@ -137,17 +137,17 @@ function Chat() {
         }
         return <div >
 <div>
-             <div class="chat_text">
-             <h1 class="chat-text-1">  Hello!</h1>
+             <div className="chat_text">
+             <h1 className="chat-text-1">  Hello!</h1>
              <br/>
-              <p class ="chat-text-1">This is a simple chatbot. If you have any queries go ahead ask me. Who knows I might be of some help!</p>
-              <img class ="chat-text-image" src="https://media3.giphy.com/media/U29zwBYWViOC7QBlJy/giphy.gif?cid=ecf05e47rhn47tmx8nw3km1efxuor2na9b5fr6jlxdd2fv8u&rid=giphy.gif&ct=g" alt="not found"/>
+              <p className ="chat-text-1">This is a simple chatbot. If you have any queries go ahead ask me. Who knows I might be of some help!</p>
+              <img className ="chat-text-image" src="https://media3.giphy.com/media/U29zwBYWViOC7QBlJy/giphy.gif?cid=ecf05e47rhn47tmx8nw3km1efxuor2na9b5fr6jlxdd2fv8u&rid=giphy.gif&ct=g" alt="not found"/>
               </div>
             
             <div  style={{
              height: 400, width: 450, 
              border:'3px solid black', borderRadius: '7px'
-             }}  class ="chat">
+             }}  className ="chat">
             
                  <div style={{ 
                   height:320, width:'100%', overflow:'auto'
