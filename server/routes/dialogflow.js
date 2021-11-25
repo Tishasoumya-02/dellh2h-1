@@ -6,6 +6,11 @@ const uuid = require('uuid');
 
 const config = require('../config/keys');
 
+const Order=require('../model/data')
+
+const validator = require("email-validator");
+ 
+
 const projectId = config.googleProjectID
 const sessionId = config.dialogFlowSessionID
 const languageCode = config.dialogFlowSessionLanguageCode
@@ -63,7 +68,7 @@ router.post('/eventQuery', async (req, res) => {
             },
         },
     };
-
+ 
     // Send request and log result
     const responses = await sessionClient.detectIntent(request);
     console.log('Detected intent');
@@ -72,6 +77,39 @@ router.post('/eventQuery', async (req, res) => {
     console.log(`  Response: ${result.fulfillmentText}`);
 
     res.send(result)
+})
+
+
+//APIs for orders
+
+
+
+router.post('/get-order-details',async (req,res)=>{
+    
+    try{
+        const orderId=req.body.orderId;
+        const orderData=await Order.findOne({orderId:orderId})
+        console.log(orderId)
+        
+
+        if(orderData){
+            if(orderData.email && orderData.zipcode && orderData.date && validator.validate(orderData.email)){
+            
+                    return res.status(201).json({orderData,success:true});
+            }
+            else{
+                return res.status(201).json({orderData,success:false});
+            }
+        }
+        else{
+            return res.status(404).json({success:false,message:"No such order found"});
+        }
+       
+    
+    }
+    catch{
+        res.json({message : "Error from the server"})
+    }
 })
 
 
