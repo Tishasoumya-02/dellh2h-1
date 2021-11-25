@@ -1,7 +1,7 @@
 import React from "react";
 
 function login(){
-    return <div>
+    return (<div>
          <div  style={{
              height: 400, width: 450, 
              border:'3px solid black', borderRadius: '7px'
@@ -14,6 +14,7 @@ function login(){
              </form>
          </div> 
     </div>
+    )
 }
 
 export default login;

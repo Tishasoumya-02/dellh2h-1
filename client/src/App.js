@@ -10,18 +10,13 @@ function App() {
 
   return (
     <>  <div className="App">
-
          <Header />
-         <Main/>
          <Footer />
     </div>
       <Routes>
-   
-         <Route  path="/login" element={<login/>} />
-         <Route  path="/user" element={<Chat/>} />
-        {/* <Chatbot/> */}
-      
-    
+      <Route exact path="/" element={<Main/>} />
+         <Route exact path="/login" element={<login/>} />
+         <Route exact  path="/user" element={<Chat/>} />    
     </Routes></>
   
  
