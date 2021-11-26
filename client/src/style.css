@@ -23,6 +23,16 @@ header p{
   margin-top: -20px;
 }
 
+.header-nav{
+  float:right;
+  margin-right: 2rem;
+  margin-top: -3.5rem;
+  color: #fff;
+  font-family:  'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .chat{
   padding-top: 2.5rem;
   margin-top: 2.5rem;
@@ -164,4 +174,30 @@ height:200px;
 width:300px;
 padding-top: 2rem;
 padding-left: -2rem;
+}
+
+.nav-text{
+  margin-top: 2rem;
+  margin-left: 3rem;
+}
+
+.nav-img{
+  float:right;
+  height:400px;
+  width:500px;
+  margin-right:4rem;
+  margin-top:-3rem;
+}
+table,tr,td{
+  border: 3px solid #FF7800;
+}
+
+th,td{
+  font-family:  'Comfortaa', cursive;
+  text-align: center;
+  border: 3px solid #FF7800;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
 }
