@@ -10,6 +10,7 @@ const port=process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+
 app.use('/api/dialogflow', require('./server/routes/dialogflow'));
 
 // Serve static assets if in production
