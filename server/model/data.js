@@ -17,13 +17,7 @@ const dataSchema=new mongoose.Schema({
         type:String,
         
     }
-    
-    
-   
 });
-
-
-
 
 const Order=new mongoose.model("ORDER",dataSchema);
 module.exports=Order;

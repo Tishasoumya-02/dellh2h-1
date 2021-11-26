@@ -81,9 +81,6 @@ router.post('/eventQuery', async (req, res) => {
 
 
 //APIs for orders
-
-
-
 router.post('/get-order-details',async (req,res)=>{
     
     try{

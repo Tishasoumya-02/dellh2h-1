@@ -5,14 +5,14 @@ import {saveMessage} from '../src/_actions/message_actions';
 
 import Message from "./Message";
 
-function Chat() {
+function ChatAdmin() {
         
 
     const dispatch=useDispatch();
     const messagesFromRedux=useSelector(state=>state.message.messages);
     
     useEffect(()=>{
-        eventQuery('WelcomeToMyBot');
+        eventQuery('WelcomeAdmin');
     },[]);
         const textQuery = async (text) => {
            
@@ -178,4 +178,4 @@ function Chat() {
        
 }
 
-export default Chat;
+export default ChatAdmin;
