@@ -46,7 +46,7 @@ function Chat() {
                     content:content
                 }
                 dispatch(saveMessage(conversation));
-                // console.log(conversation);
+                console.log("chatbot",response);
             } 
             catch (error)
             {
