@@ -15,7 +15,7 @@ function login(){
          <div  style={{
              height: 300, width: 350, 
              border:'5px solid black', borderRadius: '7px'
-             }}className="login-box">
+             }} className="login-box">
 
              <form onSubmit={moveToAdmin} >
                  <label className="login-text" for="login">   <b>Please Enter The Key</b>    </label><br/>
