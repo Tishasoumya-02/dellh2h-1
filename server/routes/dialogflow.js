@@ -3,7 +3,6 @@ const router = express.Router();
 const structjson = require('./structjson');
 const dialogflow = require('dialogflow');
 const uuid = require('uuid');
-
 const config = require('../config/keys');
 
 const Order=require('../model/data')
