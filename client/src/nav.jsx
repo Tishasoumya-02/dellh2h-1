@@ -9,11 +9,17 @@ function Nav()
       <img class="nav-img"
       src="https://media4.giphy.com/media/mr2dn3JGnlMGlHWv4N/giphy.gif?cid=ecf05e476xo5oh3djkcn2ebk79txlxwsuu1p5ohar6nex6hg&rid=giphy.gif&ct=g"
       alt="not-found"/>
-      
+
       <table>
           <tr>
               <th>S.No</th>
-              <th>Date</th>
+              <th>
+                   <select name="sort by">
+                   <option value="Sort by">Sort by</option>
+                   <option value="date">Date</option>
+                   <option value="year">Year</option>
+                   </select>
+             </th>
               <th>Order-Hold</th>
               <th>Order-Success</th>
           </tr>
