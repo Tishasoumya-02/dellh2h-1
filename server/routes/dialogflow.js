@@ -79,7 +79,7 @@ router.post('/eventQuery', async (req, res) => {
 })
 
 
-//APIs for orders
+// APIs for orders
 // router.post('/get-order-details',async (req,res)=>{
     
 //     try{
@@ -90,15 +90,17 @@ router.post('/eventQuery', async (req, res) => {
 
 //         if(orderData){
 //             if(orderData.email && orderData.zipcode && orderData.date && validator.validate(orderData.email)){
-            
-//                     return res.status(201).json({orderData,success:true});
+//               console.log("success")
+//                     // return res.status(201).json({orderData,success:true});
 //             }
 //             else{
-//                 return res.status(201).json({orderData,success:false});
+               
+//                 // return res.status(201).json({orderData,success:false});
 //             }
 //         }
 //         else{
-//             return res.status(404).json({success:false,message:"No such order found"});
+            
+//             // return res.status(404).json({success:false,message:"No such order found"});
 //         }
        
     
