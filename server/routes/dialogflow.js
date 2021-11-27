@@ -80,33 +80,33 @@ router.post('/eventQuery', async (req, res) => {
 
 
 //APIs for orders
-router.post('/get-order-details',async (req,res)=>{
+// router.post('/get-order-details',async (req,res)=>{
     
-    try{
-        const orderId=req.body.orderId;
-        const orderData=await Order.findOne({orderId:orderId})
-        console.log(orderId)
+//     try{
+//         const orderId=req.body.orderId;
+//         const orderData=await Order.findOne({orderId:orderId})
+//         console.log(orderId)
         
 
-        if(orderData){
-            if(orderData.email && orderData.zipcode && orderData.date && validator.validate(orderData.email)){
+//         if(orderData){
+//             if(orderData.email && orderData.zipcode && orderData.date && validator.validate(orderData.email)){
             
-                    return res.status(201).json({orderData,success:true});
-            }
-            else{
-                return res.status(201).json({orderData,success:false});
-            }
-        }
-        else{
-            return res.status(404).json({success:false,message:"No such order found"});
-        }
+//                     return res.status(201).json({orderData,success:true});
+//             }
+//             else{
+//                 return res.status(201).json({orderData,success:false});
+//             }
+//         }
+//         else{
+//             return res.status(404).json({success:false,message:"No such order found"});
+//         }
        
     
-    }
-    catch{
-        res.json({message : "Error from the server"})
-    }
-})
+//     }
+//     catch{
+//         res.json({message : "Error from the server"})
+//     }
+// })
 
 
 

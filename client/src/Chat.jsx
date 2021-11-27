@@ -38,7 +38,7 @@ function Chat() {
 
                 //send request to text query route
 
-                const response = await axios.post('http://localhost:5000/api/dialogflow/textQuery',textQueryVaraiables)
+                const response = await axios.post('http://42d7-117-205-245-38.ngrok.io/api/dialogflow/textQuery',textQueryVaraiables)
                 const content= response.data.fulfillmentMessages[0]
 
                 conversation = {
@@ -77,7 +77,7 @@ function Chat() {
 
                 //send request to text query route
 
-                const response = await axios.post('http://localhost:5000/api/dialogflow/eventQuery',eventQueryVaraiables)
+                const response = await axios.post('http://42d7-117-205-245-38.ngrok.io/api/dialogflow/eventQuery',eventQueryVaraiables)
                 const content= response.data.fulfillmentMessages[0]
 
               let conversation = {
@@ -111,7 +111,7 @@ function Chat() {
 
                 textQuery(e.target.value)
 
-                e.target.vaue = ""
+                e.target.vaue = " "
           
           
             }
