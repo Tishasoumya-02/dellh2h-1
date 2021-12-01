@@ -91,28 +91,30 @@ router.post('/get-order-details',async (req,res)=>{
         if(orderData){
 
 
-            const countData=await Count.find({date:orderData.date});
-            const _id=countData._id
+            // const countData=await Count.find({date:orderData.date});
+            // const _id=countData[0]._id
             if(!orderData.email || !validator.validate(orderData.email)){
                 // if(countData){
                 //     console.log(countData)
                 // }
                 // if(countData){
+                //     const filter = { date: countData[0].date };
+                //     console.log(countData[0])
                 //     let holds=countData.holdCount;
 
 
                 //     var count={
-                //         date:countData.date,
-                //         holdCount:2,
-                //         successCount:countData.successCount
+                //         date:countData[0].date,
+                //         holdCount:holds+1,
+                //         successCount:countData[0].successCount
                 //     }
 
-                //     Count.findByIdAndUpdate(_id,count,{new:true},function(err,count){
+                //     Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
                 //         if (err) {
                 //             console.log("err", err);
                             
                 //           } else {
-                //             console.log(countData.holdCount);
+                //             console.log(countData[0].holdCount);
                 //           }
                 //     })
 
@@ -131,7 +133,7 @@ router.post('/get-order-details',async (req,res)=>{
                 
                 return res.status(201).json({orderData,success:false,faulty:"email"});
             }
-            else if(!orderData.zipcode || orderData.zipcode.length<4){
+            else if(!orderData.zipcode || orderData.zipcode<1000){
                
                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
             }
