@@ -209,8 +209,8 @@ router.post('/update-order',async (req,res)=>{
         var order={
             orderId:req.body.orderId,
             zipcode:req.body.zipcode && req.body.zipcode,
-            email:req.body.zipcode && req.body.email,
-            date:req.body.zipcode && req.body.date
+            email:req.body.email && req.body.email,
+            date:req.body.date && req.body.date
         }
 
 
