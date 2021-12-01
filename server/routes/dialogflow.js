@@ -150,43 +150,6 @@ router.post('/get-order-details',async (req,res)=>{
         }
     })
 
-    router.post('/update-order',async (req,res)=>{
-        try{
-            const _id=req.body._id;
-            
-            console.log(_id)
-            var order={
-                orderId:req.body.orderId,
-                zipcode:req.body.zipcode,
-                email:req.body.email,
-                date:req.body.date
-            }
-    
-    
-            Order.findByIdAndUpdate(_id,order,{new:true},function(err,order){
-                if (err) {
-                    console.log("err", err);
-                    res.status(500).json({success:false});
-                  } else {
-                    console.log("success");
-                    res.status(201).json({success:true});
-                  }
-            })
-        }
-        catch{
-            res.status(500).json({message : "Error from the server"})
-        }
-    })
-    
-    
-    
-    
-    
-    
-    
-    
-    module.exports = router;
-    
 //         }
 //         else{
             
@@ -240,3 +203,42 @@ router.post('/get-order-details',async (req,res)=>{
 // })
 
 
+router.post('/update-order',async (req,res)=>{
+    try{
+        const _id=req.body._id;
+        const filter = { orderId: req.body.orderId };
+        console.log(_id)
+        const word='email';
+        if(word==='email')
+        {
+            var order={
+                orderId:req.body.orderId,
+                email:req.body.email && req.body.email,
+            }
+        }
+     
+
+
+        Order.findOneAndUpdate(filter,order,{new:true},function(err,order){
+            if (err) {
+                console.log("err", err);
+                res.status(500).json({success:false});
+              } else {
+                console.log("success");
+                res.status(201).json({success:true});
+              }
+        })
+    }
+    catch{
+        res.status(500).json({message : "Error from the server"})
+    }
+})
+
+
+
+
+
+
+
+
+module.exports = router;
