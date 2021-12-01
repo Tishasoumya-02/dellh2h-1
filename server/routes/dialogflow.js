@@ -16,6 +16,15 @@ const sessionId = config.dialogFlowSessionID
 const languageCode = config.dialogFlowSessionLanguageCode
 
 
+
+const fs = require('fs');
+const moment = require('moment');
+const mdq = require('mongo-date-query');
+const json2csv = require('json2csv').parse;
+const path = require('path')
+const fields = ['date', 'holdCount','successCount'];
+
+
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient();
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
@@ -91,59 +100,167 @@ router.post('/get-order-details',async (req,res)=>{
         if(orderData){
 
 
-            // const countData=await Count.find({date:orderData.date});
-            // const _id=countData[0]._id
+            const countData=await Count.find({date:orderData.date});
+            const _id=countData[0]._id
             if(!orderData.email || !validator.validate(orderData.email)){
-                // if(countData){
-                //     console.log(countData)
-                // }
-                // if(countData){
-                //     const filter = { date: countData[0].date };
-                //     console.log(countData[0])
-                //     let holds=countData.holdCount;
+                if(countData){
+                    console.log(countData)
+                }
+                if(countData){
+                    const filter = { date: countData[0].date };
+                    console.log(countData[0])
+                    let holds=countData[0].holdCount;
 
 
-                //     var count={
-                //         date:countData[0].date,
-                //         holdCount:holds+1,
-                //         successCount:countData[0].successCount
-                //     }
+                    var count={
+                        date:countData[0].date,
+                        holdCount:holds+1,
+                        successCount:countData[0].successCount
+                    }
 
-                //     Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
-                //         if (err) {
-                //             console.log("err", err);
+                    Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
+                        if (err) {
+                            console.log("err", err);
                             
-                //           } else {
-                //             console.log(countData[0].holdCount);
-                //           }
-                //     })
+                          } else {
+                            console.log(countData[0].holdCount);
+                          }
+                    })
 
 
-                // }
-                // else{
-                //     var count=new Count({
-                //         date:orderData.date,
-                //         holdCount:1,
-                //         successCount:0
-                //     })
-                //     const result=await count.save();
+                }
+                else{
+                    console.log("not present")
+                    const count=new Count({
+                        date:orderData.date,
+                        holdCount:1,
+                        successCount:0
+                    })
+                    const result=await count.save();
 
-                // }
+                }
 
                 
                 return res.status(201).json({orderData,success:false,faulty:"email"});
             }
             else if(!orderData.zipcode || orderData.zipcode<1000){
+                if(countData){
+                    console.log(countData)
+                }
+                if(countData){
+                    const filter = { date: countData[0].date };
+                    console.log(countData[0])
+                    let holds=countData[0].holdCount;
+
+
+                    var count={
+                        date:countData[0].date,
+                        holdCount:holds+1,
+                        successCount:countData[0].successCount
+                    }
+
+                    Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
+                        if (err) {
+                            console.log("err", err);
+                            
+                          } else {
+                            console.log(countData[0].holdCount);
+                          }
+                    })
+
+
+                }
+                else{
+                    console.log("not present")
+                    const count=new Count({
+                        date:orderData.date,
+                        holdCount:1,
+                        successCount:0
+                    })
+                    const result=await count.save();
+
+                }
                
                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
             }
             else if(!orderData.date){
-                
+                if(countData){
+                    console.log(countData)
+                }
+                if(countData){
+                    const filter = { date: countData[0].date };
+                    console.log(countData[0])
+                    let holds=countData[0].holdCount;
+
+
+                    var count={
+                        date:countData[0].date,
+                        holdCount:holds+1,
+                        successCount:countData[0].successCount
+                    }
+
+                    Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
+                        if (err) {
+                            console.log("err", err);
+                            
+                          } else {
+                            console.log(countData[0].holdCount);
+                          }
+                    })
+
+
+                }
+                else{
+                    console.log("not present")
+                    const count=new Count({
+                        date:orderData.date,
+                        holdCount:1,
+                        successCount:0
+                    })
+                    const result=await count.save();
+
+                }
                 
                 return res.status(201).json({orderData,success:false,faulty:"date"});
             }
             else{
                     console.log("success")
+                    if(countData){
+                        console.log(countData)
+                    }
+                    if(countData){
+                        const filter = { date: countData[0].date };
+                        console.log(countData[0])
+                        let holds=countData[0].holdCount;
+                        let s=countData[0].successCount;
+    
+                        var count={
+                            date:countData[0].date,
+                            holdCount:holds,
+                            successCount:s+1
+                        }
+    
+                        Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
+                            if (err) {
+                                console.log("err", err);
+                                
+                              } else {
+                                console.log(countData[0].holdCount);
+                              }
+                        })
+    
+    
+                    }
+                    else{
+                        console.log("not present")
+                        const count=new Count({
+                            date:orderData.date,
+                            holdCount:0,
+                            successCount:1
+                        })
+                        const result=await count.save();
+    
+                    }
                     
                     return res.status(201).json({orderData,success:true});
             }
@@ -229,6 +346,81 @@ router.post('/update-order',async (req,res)=>{
     }
 })
 
+
+
+//admin apis
+
+router.delete('/delete-order',async (req,res)=>{
+    try{
+        const orderId=req.body.orderId;
+        const orderData=await Order.findOne({orderId:orderId})
+        if(orderData){
+            Order.deleteOne({orderId:orderId},function(err){
+                if(err){
+                    res.status(201).json({success:false})
+                }
+                else{
+                    res.status(201).json({success:true})
+                }
+            })
+        }
+        else{
+            res.status(201).json({message:"No such order found",success:false})
+        }
+    }
+    catch{
+        res.status(500).json({message : "Error from the server"})
+    }
+})
+
+
+router.get('/get-count',async (req,res)=>{
+    try{
+        Count.find({}, function(err, c) {
+            var cMap = {};
+        
+            c.forEach(function(count) {
+              cMap[count.date] = count;
+            });
+            
+            res.send(cMap);  
+          });
+    }
+    catch{
+        res.status(500).json({message : "Error from the server"})
+    }
+})
+
+
+router.get('/download-data',(req,res)=>{
+    Count.find({}, function (err, count) {
+        if (err) {
+          return res.status(500).json({ err });
+        }
+        else {
+          let csv
+          try {
+            csv = json2csv(count, { fields });
+          } catch (err) {
+            return res.status(500).json({ err });
+          }
+          const dateTime = moment().format('YYYYMMDDhhmmss');
+          const filePath = path.join(__dirname, "..","csv-" + dateTime + ".csv")
+          fs.writeFile(filePath, csv, function (err) {
+            if (err) {
+              return res.json(err).status(500);
+            }
+            else {
+            //   setTimeout(function () {
+            //     fs.unlinkSync(filePath); // delete this file after 30 seconds
+            //   }, 30000)
+              return res.json("/csv-" + dateTime + ".csv");
+            }
+          });
+    
+        }
+      })
+})
 
 
 
