@@ -93,124 +93,21 @@ router.post('/get-order-details',async (req,res)=>{
 
             //const countData=await Count.findOne({date:orderData.date});
             if(!orderData.email || !validator.validate(orderData.email)){
-                // if(countData){
-                //     var count={
-                //         date:orderData.date,
-                //         holdCount:countData.holdCount+1,
-                //         successCount:countData.successCount
-                //     }
-
-                //     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-                //         if (err) {
-                //             console.log("err", err);
-                            
-                //           } else {
-                //             console.log("success");
-                //           }
-                //     })
-
-
-                // }
-                // else{
-                //     var count=new Count({
-                //         date:orderData.date,
-                //         holdCount:1,
-                //         successCount:0
-                //     })
-                //     const result=await count.save();
-
-                // }
+                
                 return res.status(201).json({orderData,success:false,faulty:"email"});
             }
             else if(!orderData.zipcode || orderData.zipcode.length<4){
-                // if(countData){
-                //     var count={
-                //         date:orderData.date,
-                //         holdCount:countData.holdCount+1,
-                //         successCount:countData.successCount
-                //     }
-
-                //     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-                //         if (err) {
-                //             console.log("err", err);
-                            
-                //           } else {
-                //             console.log("success");
-                //           }
-                //     })
-
-
-                // }
-                // else{
-                //     var count=new Count({
-                //         date:orderData.date,
-                //         holdCount:1,
-                //         successCount:0
-                //     })
-                //     const result=await count.save();
-
-                // }
+               
                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
             }
             else if(!orderData.date){
-                // if(countData){
-                //     var count={
-                //         date:orderData.date,
-                //         holdCount:countData.holdCount+1,
-                //         successCount:countData.successCount
-                //     }
-
-                //     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-                //         if (err) {
-                //             console.log("err", err);
-                            
-                //           } else {
-                //             console.log("success");
-                //           }
-                //     })
-
-
-                // }
-                // else{
-                //     var count=new Count({
-                //         date:orderData.date,
-                //         holdCount:1,
-                //         successCount:0
-                //     })
-                //     const result=await count.save();
-
-                // }
+                
+                
                 return res.status(201).json({orderData,success:false,faulty:"date"});
             }
             else{
                     console.log("success")
-                    // if(countData){
-                    //     var count={
-                    //         date:orderData.date,
-                    //         holdCount:countData.holdCount,
-                    //         successCount:countData.successCount+1
-                    //     }
-    
-                    //     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-                    //         if (err) {
-                    //             console.log("err", err);
-                                
-                    //           } else {
-                    //             console.log("success");
-                    //           }
-                    //     })
-    
-    
-                    // }
-                    // else{
-                    //     var count=new Count({
-                    //         date:orderData.date,
-                    //         holdCount:0,
-                    //         successCount:1
-                    //     })
-                    //     const result=await count.save();
-    
-                    // }
+                    
                     return res.status(201).json({orderData,success:true});
             }
             
@@ -226,6 +123,45 @@ router.post('/get-order-details',async (req,res)=>{
         res.json({message : "Error from the server"})
     }
 })
+
+// router.post('/get-order-details',async (req,res)=>{
+    
+//     try{
+//         const orderId=req.body.orderId;
+//         const orderData=await Order.findOne({orderId:orderId})
+//         console.log(orderId)
+//         if(orderData){
+//             const countData=await Count.findOne({date:orderData.date});
+//             if(!orderData.email || !validator.validate(orderData.email)){
+         
+              
+//                 return res.status(201).json({orderData,success:false,faulty:"email"});
+//             }
+//             else if(!orderData.zipcode || orderData.zipcode.length<4){
+         
+//                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
+//             }
+//             else if(!orderData.date){
+             
+//                 return res.status(201).json({orderData,success:false,faulty:"date"});
+//             }
+//             else{
+               
+//                     return res.status(201).json({orderData,success:true});
+//             }
+            
+//         }
+//         else{
+            
+//             return res.status(404).json({success:false,message:"No such order found"});
+//         }
+       
+    
+//     }
+//     catch{
+//         res.json({message : "Error from the server"})
+//     }
+// })
 
 
 router.post('/update-order',async (req,res)=>{
