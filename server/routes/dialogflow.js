@@ -81,136 +81,112 @@ router.post('/eventQuery', async (req, res) => {
 
 
 // APIs for orders
-// router.post('/get-order-details',async (req,res)=>{
+router.post('/get-order-details',async (req,res)=>{
     
-//     try{
-//         const orderId=req.body.orderId;
-//         const orderData=await Order.findOne({orderId:orderId})
-//         console.log(orderId)
-//         if(orderData){
-//             const countData=await Count.findOne({date:orderData.date});
-//             if(!orderData.email || !validator.validate(orderData.email)){
-//                 if(countData){
-//                     var count={
-//                         date:orderData.date,
-//                         holdCount:countData.holdCount+1,
-//                         successCount:countData.successCount
-//                     }
 
-//                     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-//                         if (err) {
-//                             console.log("err", err);
+        const orderId=req.body.orderId;
+        const orderData=await Order.findOne({orderId:orderId})
+        console.log(orderId)
+
+        if(orderData){
+
+
+            // const countData=await Count.find({date:orderData.date});
+            // const _id=countData[0]._id
+            if(!orderData.email || !validator.validate(orderData.email)){
+                // if(countData){
+                //     console.log(countData)
+                // }
+                // if(countData){
+                //     const filter = { date: countData[0].date };
+                //     console.log(countData[0])
+                //     let holds=countData.holdCount;
+
+
+                //     var count={
+                //         date:countData[0].date,
+                //         holdCount:holds+1,
+                //         successCount:countData[0].successCount
+                //     }
+
+                //     Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
+                //         if (err) {
+                //             console.log("err", err);
                             
-//                           } else {
-//                             console.log("success");
-//                           }
-//                     })
+                //           } else {
+                //             console.log(countData[0].holdCount);
+                //           }
+                //     })
 
 
-//                 }
-//                 else{
-//                     var count=new Count({
-//                         date:orderData.date,
-//                         holdCount:1,
-//                         successCount:0
-//                     })
-//                     const result=await count.save();
+                // }
+                // else{
+                //     var count=new Count({
+                //         date:orderData.date,
+                //         holdCount:1,
+                //         successCount:0
+                //     })
+                //     const result=await count.save();
 
-//                 }
-//                 return res.status(201).json({orderData,success:false,faulty:"email"});
-//             }
-//             else if(!orderData.zipcode || orderData.zipcode.length<4){
-//                 if(countData){
-//                     var count={
-//                         date:orderData.date,
-//                         holdCount:countData.holdCount+1,
-//                         successCount:countData.successCount
-//                     }
+                // }
 
-//                     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-//                         if (err) {
-//                             console.log("err", err);
-                            
-//                           } else {
-//                             console.log("success");
-//                           }
-//                     })
+                
+                return res.status(201).json({orderData,success:false,faulty:"email"});
+            }
+            else if(!orderData.zipcode || orderData.zipcode<1000){
+               
+                return res.status(201).json({orderData,success:false,faulty:"zipcode"});
+            }
+            else if(!orderData.date){
+                
+                
+                return res.status(201).json({orderData,success:false,faulty:"date"});
+            }
+            else{
+                    console.log("success")
+                    
+                    return res.status(201).json({orderData,success:true});
+            }
+        }
+    })
 
-
-//                 }
-//                 else{
-//                     var count=new Count({
-//                         date:orderData.date,
-//                         holdCount:1,
-//                         successCount:0
-//                     })
-//                     const result=await count.save();
-
-//                 }
-//                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
-//             }
-//             else if(!orderData.date){
-//                 if(countData){
-//                     var count={
-//                         date:orderData.date,
-//                         holdCount:countData.holdCount+1,
-//                         successCount:countData.successCount
-//                     }
-
-//                     Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-//                         if (err) {
-//                             console.log("err", err);
-                            
-//                           } else {
-//                             console.log("success");
-//                           }
-//                     })
-
-
-//                 }
-//                 else{
-//                     var count=new Count({
-//                         date:orderData.date,
-//                         holdCount:1,
-//                         successCount:0
-//                     })
-//                     const result=await count.save();
-
-//                 }
-//                 return res.status(201).json({orderData,success:false,faulty:"date"});
-//             }
-//             else{
-//                     console.log("success")
-//                     if(countData){
-//                         var count={
-//                             date:orderData.date,
-//                             holdCount:countData.holdCount,
-//                             successCount:countData.successCount+1
-//                         }
-    
-//                         Count.findAndUpdate(orderData.date,count,{new:true},function(err,count){
-//                             if (err) {
-//                                 console.log("err", err);
-                                
-//                               } else {
-//                                 console.log("success");
-//                               }
-//                         })
-    
-    
-//                     }
-//                     else{
-//                         var count=new Count({
-//                             date:orderData.date,
-//                             holdCount:0,
-//                             successCount:1
-//                         })
-//                         const result=await count.save();
-    
-//                     }
-//                     return res.status(201).json({orderData,success:true});
-//             }
+    router.post('/update-order',async (req,res)=>{
+        try{
+            const _id=req.body._id;
             
+            console.log(_id)
+            var order={
+                orderId:req.body.orderId,
+                zipcode:req.body.zipcode,
+                email:req.body.email,
+                date:req.body.date
+            }
+    
+    
+            Order.findByIdAndUpdate(_id,order,{new:true},function(err,order){
+                if (err) {
+                    console.log("err", err);
+                    res.status(500).json({success:false});
+                  } else {
+                    console.log("success");
+                    res.status(201).json({success:true});
+                  }
+            })
+        }
+        catch{
+            res.status(500).json({message : "Error from the server"})
+        }
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    module.exports = router;
+    
 //         }
 //         else{
             
@@ -264,39 +240,3 @@ router.post('/eventQuery', async (req, res) => {
 // })
 
 
-router.post('/update-order',async (req,res)=>{
-    try{
-        const _id=req.body._id;
-        
-        console.log(_id)
-        var order={
-            orderId:req.body.orderId,
-            zipcode:req.body.zipcode,
-            email:req.body.email,
-            date:req.body.date
-        }
-
-
-        Order.findByIdAndUpdate(_id,order,{new:true},function(err,order){
-            if (err) {
-                console.log("err", err);
-                res.status(500).json({success:false});
-              } else {
-                console.log("success");
-                res.status(201).json({success:true});
-              }
-        })
-    }
-    catch{
-        res.status(500).json({message : "Error from the server"})
-    }
-})
-
-
-
-
-
-
-
-
-module.exports = router;
