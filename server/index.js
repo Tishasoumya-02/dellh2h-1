@@ -2,7 +2,7 @@ const express=require('express')
 require('./db/connect')
 const path = require("path");
 const { WebhookClient } = require("dialogflow-fulfillment");
-const { welcome, defaultFallback } = require("./intents/welcomeExit");
+const { yesupdate, defaultFallback } = require("./intents/welcomeExit");
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
 const cors = require("cors");
@@ -19,7 +19,9 @@ app.use('/api/dialogflow', require('./routes/dialogflow'));
 app.post("/dialogflow", express.json(), (req, res) => {
     const agent = new WebhookClient({ request: req, response: res });
     let intentMap = new Map();
+  
     intentMap.set("Ask Order-Id", defaultFallback);
+    intentMap.set("Ask Order-Id - yes", yesupdate);
     agent.handleRequest(intentMap);
 });
 // Serve static assets if in production
