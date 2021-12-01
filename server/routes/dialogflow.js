@@ -91,8 +91,43 @@ router.post('/get-order-details',async (req,res)=>{
         if(orderData){
 
 
-            //const countData=await Count.findOne({date:orderData.date});
+            const countData=await Count.find({date:orderData.date});
+            const _id=countData._id
             if(!orderData.email || !validator.validate(orderData.email)){
+                // if(countData){
+                //     console.log(countData)
+                // }
+                // if(countData){
+                //     let holds=countData.holdCount;
+
+
+                //     var count={
+                //         date:countData.date,
+                //         holdCount:2,
+                //         successCount:countData.successCount
+                //     }
+
+                //     Count.findByIdAndUpdate(_id,count,{new:true},function(err,count){
+                //         if (err) {
+                //             console.log("err", err);
+                            
+                //           } else {
+                //             console.log(countData.holdCount);
+                //           }
+                //     })
+
+
+                // }
+                // else{
+                //     var count=new Count({
+                //         date:orderData.date,
+                //         holdCount:1,
+                //         successCount:0
+                //     })
+                //     const result=await count.save();
+
+                // }
+
                 
                 return res.status(201).json({orderData,success:false,faulty:"email"});
             }
@@ -167,7 +202,7 @@ router.post('/get-order-details',async (req,res)=>{
 router.post('/update-order',async (req,res)=>{
     try{
         const _id=req.body._id;
-        
+        const filter = { orderId: req.body.orderId };
         console.log(_id)
         var order={
             orderId:req.body.orderId,
@@ -177,7 +212,7 @@ router.post('/update-order',async (req,res)=>{
         }
 
 
-        Order.findByIdAndUpdate(_id,order,{new:true},function(err,order){
+        Order.findOneAndUpdate(filter,order,{new:true},function(err,order){
             if (err) {
                 console.log("err", err);
                 res.status(500).json({success:false});
