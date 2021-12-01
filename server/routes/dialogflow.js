@@ -92,7 +92,7 @@ router.post('/eventQuery', async (req, res) => {
 // APIs for orders
 router.post('/get-order-details',async (req,res)=>{
     
-    try{
+
         const orderId=req.body.orderId;
         const orderData=await Order.findOne({orderId:orderId})
         console.log(orderId)
@@ -264,19 +264,21 @@ router.post('/get-order-details',async (req,res)=>{
                     
                     return res.status(201).json({orderData,success:true});
             }
-            
         }
-        else{
+    })
+
+//         }
+//         else{
             
-            return res.status(404).json({success:false,message:"No such order found"});
-        }
+//             return res.status(404).json({success:false,message:"No such order found"});
+//         }
        
     
-    }
-    catch{
-        res.json({message : "Error from the server"})
-    }
-})
+//     }
+//     catch{
+//         res.json({message : "Error from the server"})
+//     }
+// })
 
 // router.post('/get-order-details',async (req,res)=>{
     
@@ -323,12 +325,15 @@ router.post('/update-order',async (req,res)=>{
         const _id=req.body._id;
         const filter = { orderId: req.body.orderId };
         console.log(_id)
-        var order={
-            orderId:req.body.orderId,
-            zipcode:req.body.zipcode && req.body.zipcode,
-            email:req.body.email && req.body.email,
-            date:req.body.date && req.body.date
+        const word='email';
+        if(word==='email')
+        {
+            var order={
+                orderId:req.body.orderId,
+                email:req.body.email && req.body.email,
+            }
         }
+     
 
 
         Order.findOneAndUpdate(filter,order,{new:true},function(err,order){
