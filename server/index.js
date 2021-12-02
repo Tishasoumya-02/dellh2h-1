@@ -2,7 +2,7 @@ const express=require('express')
 require('./db/connect')
 const path = require("path");
 const { WebhookClient } = require("dialogflow-fulfillment");
-const { yesupdate, defaultFallback } = require("./intents/welcomeExit");
+const { deleteorder,count,yesupdate, defaultFallback } = require("./intents/welcomeExit");
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
 const cors = require("cors");
@@ -22,6 +22,8 @@ app.post("/dialogflow", express.json(), (req, res) => {
   
     intentMap.set("Ask Order-Id", defaultFallback);
     intentMap.set("Ask Order-Id - yes", yesupdate);
+    intentMap.set("Count", count);
+    intentMap.set("Delete",deleteorder);
     agent.handleRequest(intentMap);
 });
 // Serve static assets if in production

@@ -14,9 +14,6 @@ const validator = require("email-validator");
 const projectId = config.googleProjectID
 const sessionId = config.dialogFlowSessionID
 const languageCode = config.dialogFlowSessionLanguageCode
-
-
-
 const fs = require('fs');
 const moment = require('moment');
 const mdq = require('mongo-date-query');
@@ -91,15 +88,11 @@ router.post('/eventQuery', async (req, res) => {
 
 // APIs for orders
 router.post('/get-order-details',async (req,res)=>{
-    
 
         const orderId=req.body.orderId;
         const orderData=await Order.findOne({orderId:orderId})
         console.log(orderId)
-
         if(orderData){
-
-
             const countData=await Count.find({date:orderData.date});
             const _id=countData[0]._id
             if(!orderData.email || !validator.validate(orderData.email)){
@@ -110,14 +103,11 @@ router.post('/get-order-details',async (req,res)=>{
                     const filter = { date: countData[0].date };
                     console.log(countData[0])
                     let holds=countData[0].holdCount;
-
-
                     var count={
                         date:countData[0].date,
                         holdCount:holds+1,
                         successCount:countData[0].successCount
                     }
-
                     Count.findOneAndUpdate(filter,count,{new:true},function(err,count){
                         if (err) {
                             console.log("err", err);
@@ -126,8 +116,6 @@ router.post('/get-order-details',async (req,res)=>{
                             console.log(countData[0].holdCount);
                           }
                     })
-
-
                 }
                 else{
                     console.log("not present")
@@ -267,59 +255,6 @@ router.post('/get-order-details',async (req,res)=>{
         }
     })
 
-//         }
-//         else{
-            
-//             return res.status(404).json({success:false,message:"No such order found"});
-//         }
-       
-    
-//     }
-//     catch{
-//         res.json({message : "Error from the server"})
-//     }
-// })
-
-// router.post('/get-order-details',async (req,res)=>{
-    
-//     try{
-//         const orderId=req.body.orderId;
-//         const orderData=await Order.findOne({orderId:orderId})
-//         console.log(orderId)
-//         if(orderData){
-//             const countData=await Count.findOne({date:orderData.date});
-//             if(!orderData.email || !validator.validate(orderData.email)){
-         
-              
-//                 return res.status(201).json({orderData,success:false,faulty:"email"});
-//             }
-//             else if(!orderData.zipcode || orderData.zipcode.length<4){
-         
-//                 return res.status(201).json({orderData,success:false,faulty:"zipcode"});
-//             }
-//             else if(!orderData.date){
-             
-//                 return res.status(201).json({orderData,success:false,faulty:"date"});
-//             }
-//             else{
-               
-//                     return res.status(201).json({orderData,success:true});
-//             }
-            
-//         }
-//         else{
-            
-//             return res.status(404).json({success:false,message:"No such order found"});
-//         }
-       
-    
-//     }
-//     catch{
-//         res.json({message : "Error from the server"})
-//     }
-// })
-
-
 router.post('/update-order',async (req,res)=>{
     try{
         const _id=req.body._id;
@@ -350,8 +285,6 @@ router.post('/update-order',async (req,res)=>{
         res.status(500).json({message : "Error from the server"})
     }
 })
-
-
 
 //admin apis
 
@@ -426,11 +359,4 @@ router.get('/download-data',(req,res)=>{
         }
       })
 })
-
-
-
-
-
-
-
 module.exports = router;
