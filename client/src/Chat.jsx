@@ -38,7 +38,7 @@ function Chat() {
 
                 //send request to text query route
 
-                const response = await axios.post(' http://ac2e-117-205-243-54.ngrok.io/api/dialogflow/textQuery',textQueryVaraiables)
+                const response = await axios.post('http://28b6-117-205-244-96.ngrok.io/api/dialogflow/textQuery',textQueryVaraiables)
                 const content= response.data.fulfillmentMessages[0]
 
                 conversation = {
@@ -77,7 +77,7 @@ function Chat() {
 
                 //send request to text query route
 
-                const response = await axios.post(' http://ac2e-117-205-243-54.ngrok.io/api/dialogflow/eventQuery',eventQueryVaraiables)
+                const response = await axios.post('http://28b6-117-205-244-96.ngrok.io/api/dialogflow/eventQuery',eventQueryVaraiables)
                 const content= response.data.fulfillmentMessages[0]
 
               let conversation = {

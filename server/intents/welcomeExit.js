@@ -63,7 +63,7 @@ async function  defaultFallback (agent) {
             Email-${orderData.email}\n
             Date-${orderData.date}\n Do you want to update your email?`);
         }
-        else if(!orderData.zipcode || orderData.zipcode.length<4){
+        else if(!orderData.zipcode || orderData.zipcode<1000){
             if(countData){
                 console.log(countData)
             }
@@ -249,7 +249,7 @@ async function  count (agent) {
             return res.status(500).json({ err });
           }
           const dateTime = moment().format('YYYYMMDDhhmmss');
-          const filePath = path.join(__dirname, "..","csv-" + dateTime + ".csv")
+          const filePath = path.join( "..","..","csv-" + dateTime + ".csv")
           fs.writeFile(filePath, csv, function (err) {
             if (err) {
               console.log("error");
@@ -271,6 +271,7 @@ async function  deleteorder (agent) {
 
     const orderId=agent.parameters.Orderid;
     const orderData=await Order.findOne({orderId:orderId})
+     const duplicate=orderData
     if(orderData){
         Order.deleteOne({orderId:orderId},function(err){
             if(err){
@@ -280,7 +281,11 @@ async function  deleteorder (agent) {
                 console.log("Success");
             }
         })
-        return agent.add(`OrderId ${orderId} deleted successfully!`);
+        return agent.add(`OrderId ${orderId} deleted successfully! deleted ORDER details  are as follows
+        OrderID-${duplicate.orderId}
+        Zipcode-${duplicate.zipcode}
+        Email-${duplicate.email}
+        Date-${duplicate.date}`);
     }
     else{
         return agent.add(`Order not found`);
