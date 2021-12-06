@@ -260,14 +260,14 @@ router.post('/update-order',async (req,res)=>{
         const _id=req.body._id;
         const filter = { orderId: req.body.orderId };
         console.log(_id)
-        const word='email';
-        if(word==='email')
-        {
-            var order={
-                orderId:req.body.orderId,
-                email:req.body.email && req.body.email,
-            }
+        
+        var order={
+            orderId:req.body.orderId,
+            email:req.body.email && req.body.email,
+            zipcode:req.body.zipcode && req.body.zipcode,
+            date:req.body.date && req.body.date
         }
+        
      
 
 

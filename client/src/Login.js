@@ -11,7 +11,7 @@ function Login() {
     
     e.preventDefault();
 
-    if (key === "2001") {
+    if (key === "2001" || key=== "2002" || key==="2003") {
       navigate("/AdminChat");
     } else {
       alert("Wrong Pass key");
